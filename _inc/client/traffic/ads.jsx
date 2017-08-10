@@ -11,7 +11,7 @@ import analytics from 'lib/analytics';
  * Internal dependencies
  */
 import { FEATURE_WORDADS_JETPACK } from 'lib/plans/constants';
-import { FormFieldset } from 'components/forms';
+import { FormFieldset, FormLegend } from 'components/forms';
 import { ModuleSettingsForm as moduleSettingsForm } from 'components/module-settings/module-settings-form';
 import { ModuleToggle } from 'components/module-toggle';
 import SettingsCard from 'components/settings-card';
@@ -27,7 +27,12 @@ export const Ads = moduleSettingsForm(
 		 */
 		getInitialState() {
 			return {
-				enable_header_ad: this.props.getOptionValue( 'enable_header_ad', 'wordads' )
+				enable_header_ad: 			this.props.getOptionValue( 'enable_header_ad', 'wordads' ),
+				wordads_second_belowpost:	this.props.getOptionValue( 'wordads_second_belowpost', 'wordads' ),
+				wordads_display_front_page:	this.props.getOptionValue( 'wordads_display_front_page', 'wordads' ),
+				wordads_display_post:		this.props.getOptionValue( 'wordads_display_post', 'wordads' ),
+				wordads_display_page:		this.props.getOptionValue( 'wordads_display_page', 'wordads' ),
+				wordads_display_archive:	this.props.getOptionValue( 'wordads_display_archive', 'wordads' ),
 			};
 		},
 
@@ -92,6 +97,49 @@ export const Ads = moduleSettingsForm(
 								onChange={ () => this.updateOptions( 'enable_header_ad' ) }>
 								<span className="jp-form-toggle-explanation">
 									{ __( 'Display an additional ad at the top of each page' ) }
+								</span>
+							</CompactFormToggle>
+							<CompactFormToggle
+								checked={ this.state.wordads_second_belowpost }
+								disabled={ ! isAdsActive || unavailableInDevMode || this.props.isSavingAnyOption( [ 'wordads', 'wordads_second_belowpost' ] ) }
+								onChange={ () => this.updateOptions( 'wordads_second_belowpost' ) }>
+								<span className="jp-form-toggle-explanation">
+									{ __( 'Display second ad below post' ) }
+								</span>
+							</CompactFormToggle>
+						</FormFieldset>
+						<FormFieldset>
+							<FormLegend>{ __( 'Enable below post ads on' ) }</FormLegend>
+							<CompactFormToggle
+								checked={ this.state.wordads_display_front_page }
+								disabled={ ! isAdsActive || unavailableInDevMode || this.props.isSavingAnyOption( [ 'wordads', 'wordads_display_front_page' ] ) }
+								onChange={ () => this.updateOptions( 'wordads_display_front_page' ) }>
+								<span className="jp-form-toggle-explanation">
+									{ __( 'Front page' ) }
+								</span>
+							</CompactFormToggle>
+							<CompactFormToggle
+								checked={ this.state.wordads_display_post }
+								disabled={ ! isAdsActive || unavailableInDevMode || this.props.isSavingAnyOption( [ 'wordads', 'wordads_display_post' ] ) }
+								onChange={ () => this.updateOptions( 'wordads_display_post' ) }>
+								<span className="jp-form-toggle-explanation">
+									{ __( 'Posts' ) }
+								</span>
+							</CompactFormToggle>
+							<CompactFormToggle
+								checked={ this.state.wordads_display_page }
+								disabled={ ! isAdsActive || unavailableInDevMode || this.props.isSavingAnyOption( [ 'wordads', 'wordads_display_page' ] ) }
+								onChange={ () => this.updateOptions( 'wordads_display_page' ) }>
+								<span className="jp-form-toggle-explanation">
+									{ __( 'Pages' ) }
+								</span>
+							</CompactFormToggle>
+							<CompactFormToggle
+								checked={ this.state.wordads_display_archive }
+								disabled={ ! isAdsActive || unavailableInDevMode || this.props.isSavingAnyOption( [ 'wordads', 'wordads_display_archive' ] ) }
+								onChange={ () => this.updateOptions( 'wordads_display_archive' ) }>
+								<span className="jp-form-toggle-explanation">
+									{ __( 'Archives' ) }
 								</span>
 							</CompactFormToggle>
 						</FormFieldset>
