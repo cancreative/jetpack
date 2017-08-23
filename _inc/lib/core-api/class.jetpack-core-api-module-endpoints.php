@@ -862,6 +862,12 @@ class Jetpack_Core_API_Data extends Jetpack_Core_API_XMLRPC_Consumer_Endpoint {
 					$updated = get_option( $option ) != $value ? update_option( $option, (bool) $value ) : true;
 					break;
 
+				case 'onboarding':
+					// Break apart and set Jetpack onboarding options.
+					update_option( 'site_title', $value['siteTitle'] );
+					$updated = true;
+					break;
+
 				default:
 					// If option value was the same, consider it done.
 					$updated = get_option( $option ) != $value ? update_option( $option, $value ) : true;
